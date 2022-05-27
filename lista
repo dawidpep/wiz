@@ -1,0 +1,170 @@
+main.dart
+
+import 'package:flutter/material.dart';
+import 'movie.dart';
+import 'data.dart';
+
+void main() {
+  runApp(const Sunday());
+}
+
+class Sunday extends StatefulWidget {
+  const Sunday({Key? key}) : super(key: key);
+
+  @override
+  State<Sunday> createState() => _SundayState();
+}
+
+class _SundayState extends State<Sunday> {
+
+  TextEditingController controllerA = TextEditingController();
+  TextEditingController controllerB = TextEditingController();
+  TextEditingController controllerC = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: Scaffold(
+            body: SafeArea(
+                child: Column(
+                  children: [
+                    Container(
+                        padding: EdgeInsets.all(8),
+                        margin: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6),
+                            border: Border.all(
+                                width: 2,
+                                color: Colors.red
+                            )
+                        ),
+                        child: Column(
+                          children: [
+                            TextField(
+                                controller: controllerA,
+                                decoration: const InputDecoration(
+                                  labelText: 'Tytuł filmu',
+                                )
+                            ),
+                            TextField(
+                                controller: controllerB,
+                                decoration: const InputDecoration(
+                                  labelText: 'Gatunek',
+                                )
+                            ),
+                            TextField(
+                                controller: controllerC,
+                                decoration: const InputDecoration(
+                                  labelText: 'Rok',
+                                )
+                            ),
+                            TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    String title = controllerA.text;
+                                    String genre = controllerB.text;
+                                    int year = int.parse(controllerC.text);
+
+                                    Movie movie = Movie(title, genre, year);
+                                    movies.add(movie);
+                                    controllerA.clear();
+                                    controllerB.clear();
+                                    controllerC.clear();
+
+                                  });
+                                },
+                                child: Text("Add")
+                            )
+                          ],
+                        )
+                    ),
+
+                    TextButton(
+                        onPressed: () {
+                          setState(() {
+                            movies.removeWhere((movie) => movie.getDelete());
+                            //i juz. Koniec zadania.
+                          });
+                        },
+                        child: Text("Delete")
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                          itemCount: movies.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return TextButton(
+                              onPressed: () {
+                                //kod powinien znajdowac sie w wywolaniu setState:
+                                setState(() {
+                                  movies[index].toggleDelete();
+                                });
+                              },
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    color: movies[index].getDelete() ? Colors.amber[700] : Colors.amber,
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  alignment: Alignment.center,
+                                  margin: const EdgeInsets.all(8),
+                                  height: 100,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(movies[index].getTitle(), style: const TextStyle(
+                                          fontSize: 22,
+                                          color: Colors.green
+                                      )
+                                      ),
+                                      Text("(${movies[index].getYear().toString()})")
+                                    ],
+                                  )
+                              ),
+                            );
+                          }
+                      ),
+                    ),
+                  ],
+                )
+            )
+        )
+    );
+  }
+}
+
+
+data.dart
+
+import 'movie.dart';
+
+List movies = [
+  Movie("Poszukiwacze zaginionej arki", "przygodowy", 1981),
+  Movie("Gwiezdne wojny", "science fiction", 1977),
+  Movie("Łowca androidów", "science fiction", 1982),
+  Movie("Frantic", "dramat", 1987),
+  Movie("Ścigany", "sensasyjny", 1993),
+  Movie("Uznany za niewinnego", "dramat", 1990),
+  Movie("Świadek", "dramat", 1985),
+  Movie("Czas apokalipsy", "wojenny", 1979)
+];
+
+
+movie.dart
+
+
+class Movie {
+  final String _title;
+  final String _genre;
+  final int _year;
+  bool _toDelete = false;
+
+  Movie(this._title, this._genre, this._year);
+
+  getTitle() => _title;
+  getGenre() => _genre;
+  getYear() => _year;
+  getDelete() => _toDelete;
+
+  toggleDelete() {
+    _toDelete = !_toDelete;
+  }
+}
