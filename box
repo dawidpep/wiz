@@ -1,0 +1,148 @@
+main.dart
+
+import 'package:flutter/material.dart';
+ 
+void main() => runApp(MyApp());
+ 
+class MyApp extends StatelessWidget {
+ 
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+          appBar: AppBar(
+           title: Text("hello world")
+          ),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                  margin: EdgeInsets.all(6),
+                  child: const Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Text("jeden", style: TextStyle(
+                          color: Colors.brown
+                      ),
+                      textAlign: TextAlign.center
+                      )),
+                  decoration: BoxDecoration(
+                      color: Colors.yellowAccent,
+                      border: Border.all(
+                          color: Colors.deepOrange,
+                          width: 2
+                      )
+                  )
+              ),
+              MyRow(),
+              Container(
+                  margin: EdgeInsets.all(6),
+                  child: const Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Text("trzy", style: TextStyle(
+                          color: Colors.brown
+                      ),
+                      textAlign: TextAlign.center
+                      )),
+                  decoration: BoxDecoration(
+                      color: Colors.yellowAccent,
+                      border: Border.all(
+                          color: Colors.deepOrange,
+                          width: 2
+                      )
+                  )
+              )
+            ]
+          )
+      )
+ 
+    );
+  }
+}
+ 
+ 
+class MyRow extends StatelessWidget {
+ 
+  Widget build(BuildContext context){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+            width: 85,
+            margin: EdgeInsets.all(6),
+            child: const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text("Text A", style: TextStyle(
+                    color: Colors.brown
+                ),
+                textAlign: TextAlign.center
+                )),
+            decoration: BoxDecoration(
+                color: Colors.amberAccent,
+                border: Border.all(
+                    color: Colors.deepOrange,
+                    width: 2
+                )
+            )
+        ),
+        Container(
+            width: 85,
+            margin: EdgeInsets.all(6),
+            child: const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text("Text B", style: TextStyle(
+                    color: Colors.brown
+                ),
+                 textAlign: TextAlign.center
+                )
+            ),
+            decoration: BoxDecoration(
+                color: Colors.amberAccent,
+                border: Border.all(
+                    color: Colors.deepOrange,
+                    width: 2
+                )
+            )
+        ),
+        Container(
+            width: 85,
+            margin: EdgeInsets.all(6),
+            child: const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text("Text C",
+                  style: TextStyle(
+                    color: Colors.brown
+                  ),
+                  textAlign: TextAlign.center
+ 
+                )),
+            decoration: BoxDecoration(
+                color: Colors.amberAccent,
+                border: Border.all(
+                    color: Colors.deepOrange,
+                    width: 2
+                )
+            )
+        ),
+        Container(
+            width: 85,
+            margin: EdgeInsets.all(6),
+            child: const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text("Text D",
+                    style: TextStyle(
+                      color: Colors.brown,
+                    ),
+                    textAlign: TextAlign.center
+                )),
+            decoration: BoxDecoration(
+                color: Colors.amberAccent,
+                border: Border.all(
+                    color: Colors.deepOrange,
+                    width: 2
+                )
+            )
+        ),
+      ]
+    );
+  }
+}
